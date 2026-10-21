@@ -3,6 +3,7 @@
   "id": "modperfmonitor",
   "name": "Mod 性能监测器",
   "version": "2.2.0",
+  "postId": "56",
   "author": "apples1949",
   "description": "函数耗时 + FPS + CPU 分项 + GC/分配监测：任何界面右上角常驻面板：**帧率行（FPS · 当帧帧时间 · 60s 均，按帧率分档着色）+ 函数耗时排行**（Top12，F8 切换 耗时/调用/单次 排序，F7 显隐）；数据源=游戏内置 [TDPerf] 分析器，由本 Mod 静默开启不刷日志）；日志按触发（启动基线/战斗开始结束/低帧/尖峰/周期60s/退出）记录，并落盘 PVZHE_Logs\\ModPerf。v2.1.0 新增三样定位瓶颈必需的数据：①CPU 分项（引擎自报 process/physics 毫秒 vs 帧时间 ⇒ 判断瓶颈在脚本还是在渲染/GPU）②GC gen0/1/2 次数与托管分配 KB/帧（判断 130~300ms 尖峰是不是 GC）③埋点覆盖率（全部埋点合计 ms/s 占墙上时间百分之几 + 有数据项数），并附带当前关卡名与已启用 Mod 清单。",
   "dependencies": [],
