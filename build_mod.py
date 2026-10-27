@@ -150,8 +150,13 @@ def package():
     if bad:
         log("[package] ❌ Runtime/ 有非法文件（会整包拒收）: %s" % bad)
         return False
-    actual = sorted(["Runtime/ModAssembly.dll"], key=str.lower)
     declared = sorted(man.get("resources", []), key=str.lower)
+    # Resources/*.png（收款码兜底海报 SponsorQR.png 等；与其它 Mod 的 build_pmod.py 同规则）
+    res_dir = os.path.join(BASE, "Resources")
+    art = []
+    if os.path.isdir(res_dir):
+        art = sorted("Resources/" + n for n in os.listdir(res_dir) if n.lower().endswith(".png"))
+    actual = sorted(["Runtime/ModAssembly.dll"] + art, key=str.lower)
     if actual != declared:
         log("[package] ❌ resources 声明与实际不一致: %s vs %s" % (declared, actual))
         return False
@@ -171,6 +176,10 @@ def package():
         zi2 = zipfile.ZipInfo("Runtime/ModAssembly.dll", (1980, 1, 1, 0, 0, 0))
         zi2.compress_type = zipfile.ZIP_DEFLATED
         z.writestr(zi2, open(dll, "rb").read())
+        for _rel in art:
+            zi3 = zipfile.ZipInfo(_rel, (1980, 1, 1, 0, 0, 0))
+            zi3.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(zi3, open(os.path.join(BASE, _rel.replace("/", os.sep)), "rb").read())
     with zipfile.ZipFile(DIST) as z:
         nl = z.namelist()
         inpack_md5 = hashlib.md5(z.read("Runtime/ModAssembly.dll")).hexdigest()

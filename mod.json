@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "id": "modperfmonitor",
   "name": "Mod 性能监测器",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "postId": "56",
   "author": "apples1949",
   "description": "函数耗时 + FPS + CPU 分项 + GC/分配监测：任何界面右上角常驻面板：**帧率行（FPS · 当帧帧时间 · 60s 均，按帧率分档着色）+ 函数耗时排行**（Top12，F8 切换 耗时/调用/单次 排序，F7 显隐）；数据源=游戏内置 [TDPerf] 分析器，由本 Mod 静默开启不刷日志）；日志按触发（启动基线/战斗开始结束/低帧/尖峰/周期60s/退出）记录，并落盘 PVZHE_Logs\\ModPerf。v2.1.0 新增三样定位瓶颈必需的数据：①CPU 分项（引擎自报 process/physics 毫秒 vs 帧时间 ⇒ 判断瓶颈在脚本还是在渲染/GPU）②GC gen0/1/2 次数与托管分配 KB/帧（判断 130~300ms 尖峰是不是 GC）③埋点覆盖率（全部埋点合计 ms/s 占墙上时间百分之几 + 有数据项数），并附带当前关卡名与已启用 Mod 清单。",
@@ -18,6 +18,7 @@
   "blueprints": [],
   "translations": [],
   "resources": [
+    "Resources/SponsorQR.png",
     "Runtime/ModAssembly.dll"
   ],
   "settings": [
@@ -33,8 +34,15 @@
     {
       "key": "aboutChangelog",
       "type": "text",
-      "content": "v2.2.0 · 2026-10-13\n① 配置页新增「切换面板显示状态」按钮：点一下即显隐右上角性能面板，并记住选择。\n② 新增「显示性能面板」配置项（此前本 Mod 没有任何配置项，配置页是空的）。\n\nv2.1.2：面板新增帧率行（FPS · 当帧帧时间 · 60s 均，按帧率分档着色）。\nv2.1.1：面板隐藏时不再刷新（安卓上单次刷新约 4ms）；分配计数器在 Mono 上不可用时不再打印垃圾数字。\n",
+      "content": "v2.2.1 · 2026-10-27\n修复：配置页关于栏收款码不显示（本 Mod 此前完全没有挂赞助码注入器，也没有「作者与链接」配置项）。\n\nv2.2.0 · 2026-10-13\n① 配置页新增「切换面板显示状态」按钮：点一下即显隐右上角性能面板，并记住选择。\n② 新增「显示性能面板」配置项（此前本 Mod 没有任何配置项，配置页是空的）。\n\nv2.1.2：面板新增帧率行（FPS · 当帧帧时间 · 60s 均，按帧率分档着色）。\nv2.1.1：面板隐藏时不再刷新（安卓上单次刷新约 4ms）；分配计数器在 Mono 上不可用时不再打印垃圾数字。\n",
       "label": "更新历史"
+    },
+    {
+      "key": "aboutAuthor",
+      "type": "richtext",
+      "label": "作者与链接",
+      "group": "关于",
+      "content": "Mod 性能监测器 v2.2.1 · 作者：apples1949\n\n[url=https://space.bilibili.com/186773722]B 站空间[/url]\n[url=https://apples1949.lanzouc.com/b007uuknqd]蓝奏云下载（密码 762b）[/url]\n\n本模组为玩家自制 Mod，与《植物大战僵尸杂交重制版》官方无隶属关系。\n赞助：微信扫码支持作者（见下方收款码图片）。"
     }
   ]
 }

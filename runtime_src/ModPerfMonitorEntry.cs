@@ -405,6 +405,11 @@ public sealed class ModPerfMonitorEntry : IXWModRuntimeEntry
 
 	private void OnFrame()
 	{
+		// ★ v2.2.1：配置页「关于」栏收款码（共享组件 SponsorQrInjector.cs；内部自带 30 帧节流 +
+		//   插好后停止全树查找，摊到每帧 ≈ 几微秒）。modName 必须与 mod.json 的 name 逐字一致 ——
+		//   注入器靠「该富文本是否以本 Mod 名开头」判定归属，不匹配就一个字都不会插。
+		try { SponsorQrInjector.Tick(Engine.GetMainLoop() as SceneTree, "Mod 性能监测器", _ctxRef?.PackageRoot ?? "", "Resources/SponsorQR.png"); } catch { }
+
 		long t0 = Stopwatch.GetTimestamp();
 		try
 		{
